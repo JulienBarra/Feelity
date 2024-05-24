@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import Svg, { G, Path } from "react-native-svg";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const logo_feelity = (
   <Svg
@@ -146,43 +147,76 @@ const logo_feelity = (
 export default function HomeScreen({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={styles.all_container}>
-      <Modal
-        style={styles.modal}
-        isVisible={modalVisible}
-        swipeDirection="right"
-        animationInTiming={300}
-        animationIn="slideInRight"
-        animationOut="slideOutRight"
-        hideModalContentWhileAnimating={true}
-        backdropTransitionInTiming={300}
-        backdropTransitionOutTiming={300}
-        onBackdropPress={() => setModalVisible(false)}
-        onSwipeComplete={() => setModalVisible(false)}
-      >
-        <View style={styles.modal}>
-          <View style={styles.principal_view}>
-            <Text style={styles.modal_title}>Profil</Text>
-            <Text style={styles.modal_content}>
-              Merci pour ce test technique ! J'ai appris pas mal de choses et
-              c'est toujours agréable de pouvoir s'entraîner !
-            </Text>
-            <Text style={styles.modal_content}>
-              Je vous remercie encore pour l'opportunité que vous m'avez donnée
-              de discuter du poste d'alternant développeur frontend lors de
-              notre entretien. Je me reconnais totalement dans l'esprit et dans
-              les valeurs de Feelity. J'ai réellement apprécié nos échanges et
-              je suis très enthousiaste à l'idée de pouvoir rejoindre votre
-              équipe et participer à vos projets !
-            </Text>
-            <Text style={styles.modal_content}>
-              J'espère que cette petite application vous plaira !
-            </Text>
-            <TouchableOpacity
-              style={styles.button_style_modal}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <View style={styles.img_button_modal}>
+    <SafeAreaView style={styles.safe_area}>
+      <View style={styles.all_container}>
+        <Modal
+          style={styles.modal}
+          isVisible={modalVisible}
+          animationInTiming={300}
+          animationIn="slideInRight"
+          animationOut="slideOutRight"
+          backdropTransitionInTiming={300}
+          backdropTransitionOutTiming={300}
+          onBackdropPress={() => setModalVisible(false)}
+        >
+          <View style={styles.modal}>
+            <View style={styles.principal_view}>
+              <Text style={styles.modal_title}>Profil</Text>
+              <ScrollView
+                style={styles.modal_content_scrollview}
+                horizontal={false}
+              >
+                <View style={styles.text_modal_view}>
+                  <Text style={styles.modal_content}>
+                    Merci pour ce test technique ! J'ai appris pas mal de choses
+                    et c'est toujours agréable de pouvoir s'entraîner !
+                  </Text>
+                  <Text style={styles.modal_content}>
+                    Je vous remercie encore pour l'opportunité que vous m'avez
+                    donnée de discuter du poste d'alternant développeur frontend
+                    lors de notre entretien. Je me reconnais totalement dans
+                    l'esprit et dans les valeurs de Feelity. J'ai réellement
+                    apprécié nos échanges et je suis très enthousiaste à l'idée
+                    de pouvoir rejoindre votre équipe et participer à vos
+                    projets !
+                  </Text>
+                  <Text style={styles.modal_content}>
+                    J'espère que cette petite application vous plaira !
+                  </Text>
+                </View>
+              </ScrollView>
+              <TouchableOpacity
+                style={styles.button_style_modal}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <View style={styles.img_button_modal}>
+                  <Svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="8.937"
+                    height="15.002"
+                    viewBox="0 0 8.937 15.002"
+                  >
+                    <Path
+                      id="Tracé_13"
+                      data-name="Tracé 13"
+                      d="M8.8-8.6a.563.563,0,0,0,0-.8L1.922-16.336a.563.563,0,0,0-.8,0L.2-15.408a.563.563,0,0,0,0,.8L5.752-9,.2-3.389a.563.563,0,0,0,0,.8l.928.928a.563.563,0,0,0,.8,0Z"
+                      transform="translate(8.968 -1.499) rotate(180)"
+                      fill="#fff"
+                    />
+                  </Svg>
+                </View>
+                <Text style={styles.text_button_modal}>Swiiiiiiiiiiipe</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+        <ScrollView style={styles.scrollview_all_page} horizontal={false}>
+          <View style={styles.header}>
+            <View style={styles.container_logo_button}>
+              <TouchableOpacity
+                style={styles.img_button}
+                onPress={() => navigation.navigate("Brief")}
+              >
                 <Svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="8.937"
@@ -197,18 +231,46 @@ export default function HomeScreen({ navigation }) {
                     fill="#fff"
                   />
                 </Svg>
-              </View>
-              <Text style={styles.text_button_modal}>Swiiiiiiiiiiipe</Text>
-            </TouchableOpacity>
+              </TouchableOpacity>
+              <View style={styles.logo}>{logo_feelity}</View>
+            </View>
           </View>
-        </View>
-      </Modal>
-      <View style={styles.header}>
-        <View style={styles.container_logo_button}>
-          <TouchableOpacity
-            style={styles.img_button}
-            onPress={() => navigation.navigate("Brief")}
-          >
+          <View style={styles.services_container}>
+            <Text style={styles.services_title}>Services</Text>
+            <ScrollView
+              horizontal={true}
+              style={styles.zone}
+              showsHorizontalScrollIndicator={false}
+            >
+              <View style={styles.first_card}>
+                <Image
+                  style={styles.image_card}
+                  source={require("../images/Rectangle 9/Rectangle 9.png")}
+                />
+              </View>
+              <View style={styles.card}>
+                <Image
+                  style={styles.image_card}
+                  source={require("../images/Rectangle 10/Rectangle 10.png")}
+                />
+              </View>
+            </ScrollView>
+          </View>
+          <View style={styles.articles_container}>
+            <Text style={styles.articles_title}>Articles</Text>
+            <Text style={styles.articles_content}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+              sit amet malesuada ex, consectetur convallis erat. Sed viverra id
+              metus in eleifend
+            </Text>
+          </View>
+        </ScrollView>
+        <TouchableOpacity
+          style={styles.button_style_bottom}
+          onPress={() => setModalVisible(!modalVisible)}
+        >
+          <Text style={styles.text_button_bottom}>Mon profil</Text>
+          <View style={styles.img_button_bottom}>
             <Svg
               xmlns="http://www.w3.org/2000/svg"
               width="8.937"
@@ -216,74 +278,34 @@ export default function HomeScreen({ navigation }) {
               viewBox="0 0 8.937 15.002"
             >
               <Path
-                id="Tracé_13"
-                data-name="Tracé 13"
                 d="M8.8-8.6a.563.563,0,0,0,0-.8L1.922-16.336a.563.563,0,0,0-.8,0L.2-15.408a.563.563,0,0,0,0,.8L5.752-9,.2-3.389a.563.563,0,0,0,0,.8l.928.928a.563.563,0,0,0,.8,0Z"
-                transform="translate(8.968 -1.499) rotate(180)"
-                fill="#fff"
+                transform="translate(-0.032 16.501)"
               />
             </Svg>
-          </TouchableOpacity>
-          <View style={styles.logo}>{logo_feelity}</View>
-        </View>
-      </View>
-      <View style={styles.services_container}>
-        <Text style={styles.services_title}>Services</Text>
-        <ScrollView
-          horizontal={true}
-          style={styles.zone}
-          showsHorizontalScrollIndicator={false}
-        >
-          <View style={styles.first_card}>
-            <Image source={require("../images/Rectangle 9/Rectangle 9.png")} />
           </View>
-          <View style={styles.card}>
-            <Image
-              source={require("../images/Rectangle 10/Rectangle 10.png")}
-            />
-          </View>
-        </ScrollView>
+        </TouchableOpacity>
       </View>
-      <View style={styles.articles_container}>
-        <Text style={styles.articles_title}>Articles</Text>
-        <Text style={styles.articles_content}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit
-          amet malesuada ex, consectetur convallis erat. Sed viverra id metus in
-          eleifend
-        </Text>
-      </View>
-      <TouchableOpacity
-        style={styles.button_style_bottom}
-        onPress={() => setModalVisible(!modalVisible)}
-      >
-        <Text style={styles.text_button_bottom}>Mon profil</Text>
-        <View style={styles.img_button_bottom}>
-          <Svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="8.937"
-            height="15.002"
-            viewBox="0 0 8.937 15.002"
-          >
-            <Path
-              d="M8.8-8.6a.563.563,0,0,0,0-.8L1.922-16.336a.563.563,0,0,0-.8,0L.2-15.408a.563.563,0,0,0,0,.8L5.752-9,.2-3.389a.563.563,0,0,0,0,.8l.928.928a.563.563,0,0,0,.8,0Z"
-              transform="translate(-0.032 16.501)"
-            />
-          </Svg>
-        </View>
-      </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safe_area: {
+    flex: 1,
+    backgroundColor: "#000000",
+  },
+  scrollview_all_page: {
+    flex: 1,
+  },
   all_container: {
     flex: 1,
+    height: "100%",
     backgroundColor: "#fff",
   },
   header: {
     backgroundColor: "#000000",
-    height: "30%",
-    paddingTop: "20%",
+    height: "45%",
+    paddingTop: "5%",
   },
   container_logo_button: {
     flexDirection: "row",
@@ -320,8 +342,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 22,
     marginTop: "auto",
+    marginBottom: "5%",
     alignSelf: "center",
-    marginBottom: "10%",
   },
   text_button_bottom: {
     fontFamily: "Roboto_800Regular",
@@ -342,7 +364,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   services_container: {
-    marginTop: -150,
+    marginTop: "-35%",
     zIndex: 1,
   },
   services_title: {
@@ -354,13 +376,12 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   zone: {
-    width: "100%",
-    height: "32%",
     flexDirection: "row",
+    height: 350,
   },
   card: {
     width: 300,
-    height: "80%",
+    height: 300,
     backgroundColor: "white",
     margin: 15,
     borderRadius: 20,
@@ -372,9 +393,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  image_card: {
+    objectFit: "contain",
+  },
   first_card: {
     width: 300,
-    height: "80%",
+    height: 300,
     backgroundColor: "white",
     margin: 15,
     marginLeft: 30,
@@ -393,21 +417,26 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#000000",
     marginBottom: 10,
-    margin: 20,
+    marginLeft: 20,
   },
   articles_content: {
     fontSize: 18,
     fontFamily: "Roboto_800Regular",
     fontWeight: "bold",
     color: "#000000",
-    margin: 20,
+    marginLeft: 20,
   },
   articles_container: {
-    marginTop: -30,
+    marginTop: 5,
   },
   modal: {
     margin: 0,
+    height: "80%",
     justifyContent: "center",
+  },
+  modal_content_scrollview: {
+    flex: 1,
+    marginHorizontal: 10,
   },
   principal_view: {
     backgroundColor: "#FFFFFF",
@@ -447,7 +476,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 22,
     marginTop: "auto",
-    marginBottom: "10%",
+    marginBottom: "5%",
     marginLeft: "5%",
   },
   text_button_modal: {
